@@ -4,6 +4,12 @@
  */
 package Interfaz;
 
+import Utils.Utils;
+import Entidades.Departamento;
+import AccesoADatos.DepartamentoAD;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ocerv
@@ -11,13 +17,16 @@ package Interfaz;
 public class RegistrarDepartamentos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistrarDepartamentos.class.getName());
-
+    private DefaultTableModel modeloTabla;
+    
     /**
      * Creates new form RegistrarDepartamentos
      */
     public RegistrarDepartamentos() {
         initComponents();
         setLocationRelativeTo(null); // Para que la ventana aparezca en el centro de la pantalla, y no en un punto específico
+        configurarTabla();
+        cargarDatosEnTabla();
     }
 
     /**
@@ -67,6 +76,11 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
         jLabel2.setText("Nombre");
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +144,60 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        String validar = validarDatos();
+        if(Utils.isNullOrWhiteSpace(validar)){
+            Departamento departamento = new Departamento(
+            txtNombre.getText()
+            );
+            boolean guardadoCorrecto = DepartamentoAD.guardarDepartamento(departamento);
+            if(!guardadoCorrecto){
+                JOptionPane.showMessageDialog(this,"No se pudo guardar el departamento. Ya hay demasiados departamentos almacenados.");
+            }
+            else txtNombre.setText("");
+        }
+        else JOptionPane.showMessageDialog(this,validar);
+        cargarDatosEnTabla();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    public String validarDatos(){
+        String validacion = "";
+        if(Utils.isNullOrWhiteSpace(txtNombre.getText())){
+            validacion = "Ingrese un nombre válido para el departamento.";
+        }
+        return validacion;
+    }
+    
+    private void configurarTabla(){
+        String[] nombresColumnas = {"Id", "Nombre"};
+        modeloTabla = new DefaultTableModel(nombresColumnas, 0) {
+            //Convierte las celdas de la tabla en No Editables
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        // Asigna el modelo recién creado a la tabla que va a mostar los datos
+        tblDepartamentos.setModel(modeloTabla);
+    }
+    
+    private void cargarDatosEnTabla(){
+    modeloTabla.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
+
+    Departamento[] listaDeDepartamentos = DepartamentoAD.consultarDepartamentos();
+
+    for(int i = 0; i < listaDeDepartamentos.length; i++){
+        if (listaDeDepartamentos[i] != null) {
+            Object[] fila = new Object[2];
+            fila[0] = listaDeDepartamentos[i].getId();
+            fila[1] = listaDeDepartamentos[i].getNombre();
+            
+            modeloTabla.addRow(fila);
+        }
+    }
+}
+    
     /**
      * @param args the command line arguments
      */

@@ -15,15 +15,15 @@ import Entidades.Articulo;
  * @author ocervantesmorav
  */
 public class ArticuloAD {
-    private final Articulo[] articulos;
-    private int contadorArticulos;
+    private  Articulo[] articulos;
+    private  int contadorArticulos;
     
     public ArticuloAD(){
         this.articulos = new Articulo[20];
         this.contadorArticulos = 0;
     }
     
-    public boolean guardarArticulo(Articulo pArticulo){
+    public  boolean guardarArticulo(Articulo pArticulo){
         if(contadorArticulos < articulos.length){
             articulos[contadorArticulos] = pArticulo;
             contadorArticulos++;
@@ -31,7 +31,7 @@ public class ArticuloAD {
         } else return false;
     }
     
-    public Articulo[] consultarArticulos(){
+    public  Articulo[] consultarArticulos(){
         Articulo[] articulosRegistrados = new Articulo[contadorArticulos];
         for(int i = 0; i < contadorArticulos ; i++){
             articulosRegistrados[i] = articulos[i];
@@ -39,7 +39,7 @@ public class ArticuloAD {
         return articulosRegistrados;
     }
     
-    public Articulo consultarPorId(int pId){
+    public  Articulo consultarPorId(int pId){
         for(int i = 0; i < contadorArticulos ; i++){
             if(articulos[i] != null && articulos[i].getId() == pId) return articulos[i];
         }

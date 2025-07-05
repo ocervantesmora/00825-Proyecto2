@@ -15,15 +15,13 @@ import Entidades.Departamento;
  * @author ocervantesmora
  */
 public class DepartamentoAD {
-    private Departamento[] departamentos;
-    private int contadorDepartamentos;
+    private static Departamento[] departamentos = new Departamento[20];
+    private static int contadorDepartamentos = 0;
     
     public DepartamentoAD(){
-        this.departamentos = new Departamento[20];
-        this.contadorDepartamentos = 0;
     }
     
-    public boolean guardarDepartamento(Departamento pDepartamento){
+    public static boolean guardarDepartamento(Departamento pDepartamento){
         if(contadorDepartamentos < departamentos.length){
             departamentos[contadorDepartamentos] = pDepartamento;
             contadorDepartamentos++;
@@ -31,7 +29,7 @@ public class DepartamentoAD {
         } else return false;
     }
     
-    public Departamento[] consultarDepartamentos(){
+    public static Departamento[] consultarDepartamentos(){
         Departamento[] departamentosRegistrados = new Departamento[contadorDepartamentos];
         for(int i = 0; i < contadorDepartamentos ; i++){
             departamentosRegistrados[i] = departamentos[i];
@@ -39,7 +37,7 @@ public class DepartamentoAD {
         return departamentosRegistrados;
     }
     
-    public Departamento consultarPortId(int pId){
+    public static Departamento consultarPortId(int pId){
         for(int i = 0; i < contadorDepartamentos; i++){
             if(departamentos[i] != null && departamentos[i].getId() == pId) return departamentos[i];
         }

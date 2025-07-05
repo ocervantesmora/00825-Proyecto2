@@ -11,8 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author ocerv
+ * UNED II Cuatrimestre
+ * 00825 - Estructuras de datos
+ * Proyecto 2: Sistema de gestión de tienda por departamentos
+ * Estudiante: Oscar Eduardo Cervantes Mora
+ * Fecha: 2025-07-13
+ * @author ocervantesmora
  */
 public class RegistrarDepartamentos extends javax.swing.JFrame {
     
@@ -187,16 +191,16 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
 
     Departamento[] listaDeDepartamentos = DepartamentoAD.consultarDepartamentos();
 
-    for(int i = 0; i < listaDeDepartamentos.length; i++){
-        if (listaDeDepartamentos[i] != null) {
-            Object[] fila = new Object[2];
-            fila[0] = listaDeDepartamentos[i].getId();
-            fila[1] = listaDeDepartamentos[i].getNombre();
-            
-            modeloTabla.addRow(fila);
+        for(int i = 0; i < listaDeDepartamentos.length; i++){
+            if (listaDeDepartamentos[i] != null) {
+                Object[] fila = new Object[2];
+                fila[0] = listaDeDepartamentos[i].getId();
+                fila[1] = listaDeDepartamentos[i].getNombre();
+
+                modeloTabla.addRow(fila);
+            }
         }
     }
-}
     
     /**
      * @param args the command line arguments

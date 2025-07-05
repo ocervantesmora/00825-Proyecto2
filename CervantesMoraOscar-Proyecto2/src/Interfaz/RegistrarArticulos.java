@@ -4,20 +4,30 @@
  */
 package Interfaz;
 
+import AccesoADatos.DepartamentoAD;
+import Entidades.Departamento;
+import javax.swing.table.DefaultTableModel;
+
 /**
- *
- * @author ocerv
+ * UNED II Cuatrimestre
+ * 00825 - Estructuras de datos
+ * Proyecto 2: Sistema de gestión de tienda por departamentos
+ * Estudiante: Oscar Eduardo Cervantes Mora
+ * Fecha: 2025-07-13
+ * @author ocervantesmora
  */
 public class RegistrarArticulos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistrarArticulos.class.getName());
-
+    private DefaultTableModel modeloTabla;
     /**
      * Creates new form RegistrarArticulos
      */
     public RegistrarArticulos() {
         initComponents();
         setLocationRelativeTo(null); // Para que la ventana aparezca en el centro de la pantalla, y no en un punto específico
+        configurarTabla();
+        cargarDatosEnTabla();
     }
 
     /**
@@ -144,6 +154,34 @@ public class RegistrarArticulos extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void configurarTabla(){
+        String[] nombresColumnas = {"Id", "Nombre"};
+        modeloTabla = new DefaultTableModel(nombresColumnas, 0) {
+            //Convierte las celdas de la tabla en No Editables
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        // Asigna el modelo recién creado a la tabla que va a mostar los datos
+        tblDepartamentos.setModel(modeloTabla);
+    }
+    
+    private void cargarDatosEnTabla(){
+    modeloTabla.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
+
+    Departamento[] listaDeDepartamentos = DepartamentoAD.consultarDepartamentos();
+
+        for(int i = 0; i < listaDeDepartamentos.length; i++){
+            if (listaDeDepartamentos[i] != null) {
+                Object[] fila = new Object[2];
+                fila[0] = listaDeDepartamentos[i].getId();
+                fila[1] = listaDeDepartamentos[i].getNombre();
+
+                modeloTabla.addRow(fila);
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */

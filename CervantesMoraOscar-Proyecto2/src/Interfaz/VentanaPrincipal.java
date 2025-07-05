@@ -18,7 +18,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
-        setLocationRelativeTo(null); // PAra que la ventana aparezca en el centro de la pantalla, y no en un punto específico
+        setLocationRelativeTo(null); // Para que la ventana aparezca en el centro de la pantalla, y no en un punto específico
     }
 
     /**
@@ -42,11 +42,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tienda Por Departamentos");
 
         btnRegistrarDepartamento.setText("Registrar Departamento");
+        btnRegistrarDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarDepartamentoActionPerformed(evt);
+            }
+        });
 
         btnRegistrarArticulo.setText("Registrar Artículo");
+        btnRegistrarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarArticuloActionPerformed(evt);
+            }
+        });
 
         btnEliminarArticulo.setText("Eliminar Artículo");
 
@@ -68,27 +79,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRegistrarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegistrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTrasladarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(btnSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRegistrarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRegistrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEliminarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTrasladarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEliminarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(btnSalir)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addComponent(btnRegistrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,7 +112,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnTrasladarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(22, 22, 22))
         );
@@ -110,6 +124,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnRegistrarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDepartamentoActionPerformed
+        // TODO add your handling code here:
+        VentanaPrincipal.this.dispose();
+        RegistrarDepartamentos registrarDepartamentos = new RegistrarDepartamentos();
+        registrarDepartamentos.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarDepartamentoActionPerformed
+
+    private void btnRegistrarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarArticuloActionPerformed
+        // TODO add your handling code here:
+        VentanaPrincipal.this.dispose();
+        RegistrarArticulos registrarArticulos = new RegistrarArticulos();
+        registrarArticulos.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarArticuloActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,7 @@
 package AccesoADatos;
 
 import Entidades.Departamento;
+import EstructurasDeDatos.Pila;
 
 /**
  * UNED II Cuatrimestre
@@ -15,32 +16,33 @@ import Entidades.Departamento;
  * @author ocervantesmora
  */
 public class DepartamentoAD {
-    private static Departamento[] departamentos = new Departamento[20];
-    private static int contadorDepartamentos = 0;
-    
+    private static final Pila departamentos;
+    static{
+        departamentos = new Pila(20);
+    }
     public DepartamentoAD(){
     }
     
     public static boolean guardarDepartamento(Departamento pDepartamento){
-        if(contadorDepartamentos < departamentos.length){
-            departamentos[contadorDepartamentos] = pDepartamento;
-            contadorDepartamentos++;
-            return true;
-        } else return false;
+        return departamentos.push(pDepartamento);
     }
     
     public static Departamento[] consultarDepartamentos(){
-        Departamento[] departamentosRegistrados = new Departamento[contadorDepartamentos];
-        for(int i = 0; i < contadorDepartamentos ; i++){
-            departamentosRegistrados[i] = departamentos[i];
+        Object[] objetosPila = departamentos.toArray();
+        
+        Departamento[] departamentosRegistrados = new Departamento[objetosPila.length];
+        for(int i = 0; i < objetosPila.length ; i++){
+            departamentosRegistrados[i] = (Departamento) objetosPila[i];
         }
         return departamentosRegistrados;
     }
     
-    public static Departamento consultarPortId(int pId){
-        for(int i = 0; i < contadorDepartamentos; i++){
-            if(departamentos[i] != null && departamentos[i].getId() == pId) return departamentos[i];
-        }
-        return null;
+    public static int getCantidadDepartamentos() {
+        return departamentos.size();
     }
+    
+    public static Departamento sacarDepartamento(){
+        return (Departamento) departamentos.pop();
+    }
+
 }

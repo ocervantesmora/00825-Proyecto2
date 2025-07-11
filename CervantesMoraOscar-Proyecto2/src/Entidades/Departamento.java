@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import EstructurasDeDatos.Cola;
+
 /**
  * UNED II Cuatrimestre
  * 00825 - Estructuras de datos
@@ -16,12 +18,12 @@ public class Departamento {
     private static int siguienteId = 1;
     private int id;
     private String nombre;
-    private Articulo[] articulos;
+    private Cola articulos;
     
     public Departamento(String pNombre){
         this.id = siguienteId++;
         this.nombre = pNombre;
-        this.articulos = new Articulo[20];
+        this.articulos = new Cola(20);
     }
     
     public int getId(){
@@ -32,7 +34,7 @@ public class Departamento {
         return nombre;
     }
     
-    public Articulo[] getArticulos(){
+    public Cola getArticulos(){
         return articulos;
     }
     

@@ -5,6 +5,7 @@
 package AccesoADatos;
 
 import Entidades.Articulo;
+import EstructurasDeDatos.Cola;
 
 /**
  * UNED II Cuatrimestre
@@ -15,34 +16,31 @@ import Entidades.Articulo;
  * @author ocervantesmorav
  */
 public class ArticuloAD {
-    private  Articulo[] articulos;
-    private  int contadorArticulos;
+    private Cola articulos;
     
     public ArticuloAD(){
-        this.articulos = new Articulo[20];
-        this.contadorArticulos = 0;
+        this.articulos = new Cola(20);
     }
     
     public  boolean guardarArticulo(Articulo pArticulo){
-        if(contadorArticulos < articulos.length){
-            articulos[contadorArticulos] = pArticulo;
-            contadorArticulos++;
-            return true;
-        } else return false;
+        return articulos.enqueue(pArticulo);
     }
     
     public  Articulo[] consultarArticulos(){
-        Articulo[] articulosRegistrados = new Articulo[contadorArticulos];
-        for(int i = 0; i < contadorArticulos ; i++){
-            articulosRegistrados[i] = articulos[i];
+        Object[] objetosCola = articulos.toArray();
+        
+        Articulo[] articulosRegistrados = new Articulo[objetosCola.length];
+        for(int i = 0; i < objetosCola.length ; i++){
+            articulosRegistrados[i] = (Articulo) objetosCola[i];
         }
         return articulosRegistrados;
     }
     
-    public  Articulo consultarPorId(int pId){
-        for(int i = 0; i < contadorArticulos ; i++){
-            if(articulos[i] != null && articulos[i].getId() == pId) return articulos[i];
-        }
-        return null;
+    public int getCantidadArticulos() {
+        return articulos.size();
+    }
+    
+    public Articulo sacarArticulo(){
+        return (Articulo) articulos.dequeue();
     }
 }

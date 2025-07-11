@@ -5,7 +5,7 @@
 package Entidades;
 
 /**
- *UNED II Cuatrimestre
+ * UNED II Cuatrimestre
  * 00825 - Estructuras de datos
  * Proyecto 2: Sistema de gestión de tienda por departamentos
  * Estudiante: Oscar Eduardo Cervantes Mora

@@ -4,8 +4,10 @@
  */
 package Interfaz;
 
-import AccesoADatos.DepartamentoAD;
-import Entidades.Departamento;
+import AccesoADatos.*;
+import Entidades.*;
+import Utils.Utils;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,20 +42,40 @@ public class RegistrarArticulos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDepartamentos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cmbCategorias = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDepartamentos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registrar Artículo");
+
+        jLabel2.setText("Nombre");
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Categoría");
+
+        cmbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ropa y accesorios", "Electrónica", "Hogar y muebles", "Belleza y cuidado personal", "Deportes y aire libre", "Juguetes y juegos", "Alimentos y bebidas" }));
 
         tblDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,21 +98,6 @@ public class RegistrarArticulos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDepartamentos);
 
-        jLabel2.setText("Nombre");
-
-        btnRegistrar.setText("Registrar");
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Categoría");
-
-        cmbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ropa y accesorios", "Electrónica", "Hogar y muebles", "Belleza y cuidado personal", "Deportes y aire libre", "Juguetes y juegos", "Alimentos y bebidas" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,38 +105,38 @@ public class RegistrarArticulos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(0, 41, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancelar)
-                            .addComponent(btnRegistrar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCancelar)
+                                    .addComponent(btnRegistrar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(101, 101, 101)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                    .addComponent(cmbCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(cmbCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(59, 59, 59))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -137,7 +144,7 @@ public class RegistrarArticulos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(btnRegistrar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -154,8 +161,35 @@ public class RegistrarArticulos extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        String validar = validarDatos();
+        if(Utils.isNullOrWhiteSpace(validar)){
+            Articulo articulo = new Articulo(
+            txtNombre.getText(),
+            cmbCategorias.getSelectedItem().toString()
+            );
+            int idDepartamentoSeleccionado = (int) modeloTabla.getValueAt(tblDepartamentos.getSelectedRow(), 0);
+            Departamento departamentoSeleccionado = DepartamentoAD.consultarPorId(idDepartamentoSeleccionado);
+            boolean guardadoCorrecto = departamentoSeleccionado.agregarArticulo(articulo);
+            
+            if(!guardadoCorrecto){
+                JOptionPane.showMessageDialog(this,"No se pudo guardar el departamento. Ya hay demasiados departamentos almacenados.");
+            }
+            else txtNombre.setText("");
+        } else JOptionPane.showMessageDialog(this,validar);
+        cargarDatosEnTabla();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    public String validarDatos(){
+        String validacion = "";
+        if(tblDepartamentos.getSelectedRow() == -1) validacion = "Seleccione un departamento de la lista.";
+        else if(Utils.isNullOrWhiteSpace(txtNombre.getText())) validacion = "Ingrese un nombre válido para el artículo.";
+        return validacion;
+    }
+    
     private void configurarTabla(){
-        String[] nombresColumnas = {"Id", "Nombre"};
+        String[] nombresColumnas = {"Id", "Nombre", "Artículos"};
         modeloTabla = new DefaultTableModel(nombresColumnas, 0) {
             //Convierte las celdas de la tabla en No Editables
             @Override
@@ -174,9 +208,10 @@ public class RegistrarArticulos extends javax.swing.JFrame {
 
         for(int i = 0; i < listaDeDepartamentos.length; i++){
             if (listaDeDepartamentos[i] != null) {
-                Object[] fila = new Object[2];
+                Object[] fila = new Object[3];
                 fila[0] = listaDeDepartamentos[i].getId();
                 fila[1] = listaDeDepartamentos[i].getNombre();
+                fila[2] = listaDeDepartamentos[i].getArticulos();
 
                 modeloTabla.addRow(fila);
             }

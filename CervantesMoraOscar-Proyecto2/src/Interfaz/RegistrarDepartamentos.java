@@ -174,7 +174,7 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
     }
     
     private void configurarTabla(){
-        String[] nombresColumnas = {"Id", "Nombre"};
+        String[] nombresColumnas = {"Id", "Nombre", "Artículos"};
         modeloTabla = new DefaultTableModel(nombresColumnas, 0) {
             //Convierte las celdas de la tabla en No Editables
             @Override
@@ -193,9 +193,10 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
 
         for(int i = 0; i < listaDeDepartamentos.length; i++){
             if (listaDeDepartamentos[i] != null) {
-                Object[] fila = new Object[2];
+                Object[] fila = new Object[3];
                 fila[0] = listaDeDepartamentos[i].getId();
                 fila[1] = listaDeDepartamentos[i].getNombre();
+                fila[2] = listaDeDepartamentos[i].getArticulos();
 
                 modeloTabla.addRow(fila);
             }

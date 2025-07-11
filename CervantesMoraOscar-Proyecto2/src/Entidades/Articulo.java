@@ -43,4 +43,9 @@ public class Articulo {
     public void setCategoria(String pCategoria){
         this.categoria = pCategoria;
     }
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }

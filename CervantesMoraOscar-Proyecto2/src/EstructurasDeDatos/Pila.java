@@ -22,7 +22,6 @@ public class Pila {
     }
     
     public Pila(int pTamano){
-        if(pTamano <=0) throw new IllegalArgumentException("El tamano de la pila debe ser mayor que 0.");
         this.elementos = new Object[pTamano];
         this.tope = -1;
     }

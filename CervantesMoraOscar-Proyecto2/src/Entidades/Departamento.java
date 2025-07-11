@@ -16,9 +16,9 @@ import EstructurasDeDatos.Cola;
  */
 public class Departamento {
     private static int siguienteId = 1;
-    private int id;
+    private final int id;
     private String nombre;
-    private Cola articulos;
+    private final Cola articulos;
     
     public Departamento(String pNombre){
         this.id = siguienteId++;
@@ -40,5 +40,13 @@ public class Departamento {
     
     public void setNombre(String pNombre){
         this.nombre = pNombre;
+    }
+    
+    public boolean agregarArticulo(Articulo pArticulo){
+        return articulos.enqueue(pArticulo);
+    }
+    
+    public Articulo removerArticulo(){
+        return (Articulo) articulos.dequeue();
     }
 }

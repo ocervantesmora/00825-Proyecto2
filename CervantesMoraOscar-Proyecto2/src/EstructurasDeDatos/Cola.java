@@ -20,9 +20,6 @@ public class Cola {
     }
     
     public Cola(int pTamano){
-        if(pTamano <= 0){
-            throw new IllegalArgumentException("La capacidad de la cola debe ser mayor que 0.");
-        }
         this.elementos = new Object[pTamano+1];
         this.inicio = 0;
         this.fin = 0;
@@ -82,5 +79,19 @@ public class Cola {
             actual = (actual + 1) % elementos.length;
         }
         return resultado;
+    }
+    
+    @Override
+    public String toString(){
+        if(isEmpty()) return "Cola: [] vacía";
+        int actual = inicio;
+        String cola = "Cola: [";
+        for(int i = 0 ; i < tamano ; i++){
+            cola = cola + elementos[actual];
+            if(i < tamano - 1) cola = cola + ", ";
+            actual = (actual + 1) % elementos.length;
+        }
+        cola = cola + "]";
+        return cola;
     }
 }

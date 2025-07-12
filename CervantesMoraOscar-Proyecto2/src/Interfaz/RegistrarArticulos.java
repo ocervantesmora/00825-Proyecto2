@@ -165,14 +165,9 @@ public class RegistrarArticulos extends javax.swing.JFrame {
         // TODO add your handling code here:
         String validar = validarDatos();
         if(Utils.isNullOrWhiteSpace(validar)){
-            Articulo articulo = new Articulo(
-            txtNombre.getText(),
-            cmbCategorias.getSelectedItem().toString()
-            );
             int idDepartamentoSeleccionado = (int) modeloTabla.getValueAt(tblDepartamentos.getSelectedRow(), 0);
             Departamento departamentoSeleccionado = DepartamentoAD.consultarPorId(idDepartamentoSeleccionado);
-            boolean guardadoCorrecto = departamentoSeleccionado.agregarArticulo(articulo);
-            
+            boolean guardadoCorrecto = departamentoSeleccionado.agregarArticulo(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
             if(!guardadoCorrecto){
                 JOptionPane.showMessageDialog(this,"No se pudo guardar el departamento. Ya hay demasiados departamentos almacenados.");
             }

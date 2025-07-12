@@ -52,5 +52,4 @@ public class DepartamentoAD {
         }
         return null;
     }
-
 }

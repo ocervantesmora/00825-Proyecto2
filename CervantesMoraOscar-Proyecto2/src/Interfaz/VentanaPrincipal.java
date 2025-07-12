@@ -64,6 +64,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnEliminarArticulo.setText("Eliminar Artículo");
+        btnEliminarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarArticuloActionPerformed(evt);
+            }
+        });
 
         btnTrasladarArticulo.setText("Trasladar Artículo");
 
@@ -142,6 +147,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         RegistrarArticulos registrarArticulos = new RegistrarArticulos();
         registrarArticulos.setVisible(true);
     }//GEN-LAST:event_btnRegistrarArticuloActionPerformed
+
+    private void btnEliminarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarArticuloActionPerformed
+        // TODO add your handling code here:
+        VentanaPrincipal.this.dispose();
+        EliminarArticulo eliminarArticulo = new EliminarArticulo();
+        eliminarArticulo.setVisible(true);
+    }//GEN-LAST:event_btnEliminarArticuloActionPerformed
 
     /**
      * @param args the command line arguments

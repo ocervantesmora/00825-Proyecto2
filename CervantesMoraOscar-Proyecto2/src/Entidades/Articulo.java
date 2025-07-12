@@ -13,13 +13,12 @@ package Entidades;
  * @author ocervantesmora
  */
 public class Articulo {
-    private static int siguienteId = 1;
     private int id;
     private String nombre;
     private String categoria;
     
-    public Articulo(String pNombre, String pCategoria){
-        this.id = siguienteId++;
+    public Articulo(int pId, String pNombre, String pCategoria){
+        this.id = pId;
         this.nombre = pNombre;
         this.categoria = pCategoria;
     }

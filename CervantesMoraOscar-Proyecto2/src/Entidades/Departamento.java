@@ -19,11 +19,13 @@ public class Departamento {
     private final int id;
     private String nombre;
     private final Cola articulos;
+    private int siguienteArticuloId;
     
     public Departamento(String pNombre){
         this.id = siguienteId++;
         this.nombre = pNombre;
         this.articulos = new Cola(20);
+        this.siguienteArticuloId = 1;
     }
     
     public int getId(){
@@ -42,8 +44,11 @@ public class Departamento {
         this.nombre = pNombre;
     }
     
-    public boolean agregarArticulo(Articulo pArticulo){
-        return articulos.enqueue(pArticulo);
+    public boolean agregarArticulo(String pNombre,String pCategoria){
+        Articulo articulo = new Articulo(this.siguienteArticuloId,pNombre,pCategoria);
+        boolean articuloAgregado = articulos.enqueue(articulo);
+        if(articuloAgregado) siguienteArticuloId++;
+        return articuloAgregado;
     }
     
     public Articulo removerArticulo(){

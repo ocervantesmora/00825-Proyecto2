@@ -12,6 +12,9 @@ package EstructurasDeDatos;
  * Fecha: 2025-07-13
  * @author ocervantesmora
  */
+
+// Esta implementación es de una cola circular, porque se investigó y es la que tiene mejor rendimiento en cuanto a memoria y procesamiento
+// Esto quiere decir que el último elemento se conecta al primero, reutilizando espacios de forma eficiente.
 public class Cola {
     private Object[] elementos;
     private int inicio;

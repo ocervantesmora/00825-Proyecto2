@@ -6,7 +6,9 @@ package Interfaz;
 
 import AccesoADatos.DepartamentoAD;
 import Entidades.Departamento;
+import Utils.Utils;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -84,6 +86,11 @@ public class TrasladarArticulos extends javax.swing.JFrame {
         });
 
         btnTrasladar.setText("Trasladar");
+        btnTrasladar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrasladarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,6 +155,43 @@ public class TrasladarArticulos extends javax.swing.JFrame {
         ventanaPrincipal.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnTrasladarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrasladarActionPerformed
+        // TODO add your handling code here:
+        String validar = validacionesParaTrasladar();
+        if(Utils.isNullOrWhiteSpace(validar)){
+            String textoOrigen = cmbOrigen.getSelectedItem().toString();
+            String textoDestino = cmbDestino.getSelectedItem().toString();
+            String idDepartamentoOrigen = textoOrigen.substring(0,textoOrigen.indexOf(" - "));
+            String idDepartamentoDestino = textoDestino.substring(0,textoDestino.indexOf(" - "));
+            Departamento departamentoOrigen = DepartamentoAD.consultarPorId(Integer.parseInt(idDepartamentoOrigen));
+            Departamento departamentoDestino = DepartamentoAD.consultarPorId(Integer.parseInt(idDepartamentoDestino));
+            
+            while(!departamentoOrigen.getArticulos().isEmpty() && !departamentoDestino.getArticulos().isFull()){
+                departamentoDestino.getArticulos().enqueue(departamentoOrigen.getArticulos().dequeue());
+            }
+            cargarDatosEnTabla();
+            cargarDepartamentosEnOrigen();
+            cargarDepartamentosEnDestino();
+        }
+        
+        else JOptionPane.showMessageDialog(this,validar);
+    }//GEN-LAST:event_btnTrasladarActionPerformed
+
+    private String validacionesParaTrasladar(){
+        if(DepartamentoAD.consultarDepartamentos().length < 2) return "La pila de departamentos debe tener al menos 2 elementos registrados.";
+        
+        String textoOrigen = cmbOrigen.getSelectedItem().toString();
+        String textoDestino = cmbDestino.getSelectedItem().toString();
+        String idDepartamentoOrigen = textoOrigen.substring(0,textoOrigen.indexOf(" - "));
+        String idDepartamentoDestino = textoDestino.substring(0,textoDestino.indexOf(" - "));
+        Departamento departamentoOrigen = DepartamentoAD.consultarPorId(Integer.parseInt(idDepartamentoOrigen));
+        Departamento departamentoDestino = DepartamentoAD.consultarPorId(Integer.parseInt(idDepartamentoDestino));
+        
+        if(departamentoOrigen.getArticulos().isEmpty()) return "El departamento de origen debe tener al menos un artículo registrado.";
+        if(textoOrigen.equals(textoDestino)) return "El departamento de origen y de destino deben ser diferentes.";
+        if(departamentoDestino.getArticulos().isFull()) return "La cola de artículos del departamento de destino está llena.";
+        return "";
+    }
     /**
      * @param args the command line arguments
      */
@@ -208,7 +252,7 @@ public class TrasladarArticulos extends javax.swing.JFrame {
         Departamento[] departamentos = DepartamentoAD.consultarDepartamentos();
         
         for(int i = 0 ; i < departamentos.length; i++){
-            if(departamentos[i] != null && departamentos[i].getArticulos().size() > 0) modelCmbOrigen.addElement(departamentos[i].toString());
+            if(departamentos[i] != null /*&& departamentos[i].getArticulos().size() > 0*/) modelCmbOrigen.addElement(departamentos[i].toString());
         }
         cmbOrigen.setModel(modelCmbOrigen);
     }

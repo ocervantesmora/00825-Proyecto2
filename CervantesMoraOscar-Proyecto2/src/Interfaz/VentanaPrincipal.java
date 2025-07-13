@@ -71,8 +71,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnTrasladarArticulo.setText("Trasladar Artículo");
+        btnTrasladarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrasladarArticuloActionPerformed(evt);
+            }
+        });
 
         btnEliminarDepartamento.setText("Eliminar Departamento");
+        btnEliminarDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDepartamentoActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +164,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         EliminarArticulo eliminarArticulo = new EliminarArticulo();
         eliminarArticulo.setVisible(true);
     }//GEN-LAST:event_btnEliminarArticuloActionPerformed
+
+    private void btnEliminarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepartamentoActionPerformed
+        // TODO add your handling code here:
+        VentanaPrincipal.this.dispose();
+        EliminarDepartamento eliminarDepartamento = new EliminarDepartamento();
+        eliminarDepartamento.setVisible(true);
+    }//GEN-LAST:event_btnEliminarDepartamentoActionPerformed
+
+    private void btnTrasladarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrasladarArticuloActionPerformed
+        // TODO add your handling code here:
+        VentanaPrincipal.this.dispose();
+        TrasladarArticulos trasladarArticulos = new TrasladarArticulos();
+        trasladarArticulos.setVisible(true);
+    }//GEN-LAST:event_btnTrasladarArticuloActionPerformed
 
     /**
      * @param args the command line arguments

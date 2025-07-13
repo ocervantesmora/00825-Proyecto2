@@ -45,6 +45,10 @@ public class DepartamentoAD {
         return (Departamento) departamentos.pop();
     }
     
+    public static Departamento peekDepartamento(){
+        return (Departamento) departamentos.peek();
+    }
+    
     public static Departamento consultarPorId(int pId){
         Departamento[] todosLosDepartamentos = consultarDepartamentos();
         for(int i = 0 ; i < todosLosDepartamentos.length ; i++){

@@ -54,4 +54,9 @@ public class Departamento {
     public Articulo removerArticulo(){
         return (Articulo) articulos.dequeue();
     }
+    
+    @Override
+    public String toString(){
+        return this.getId()+" - "+this.getNombre();
+    }
 }

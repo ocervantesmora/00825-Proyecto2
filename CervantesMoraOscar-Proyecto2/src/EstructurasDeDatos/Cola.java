@@ -83,7 +83,7 @@ public class Cola {
     
     @Override
     public String toString(){
-        if(isEmpty()) return "Cola: [] vacía";
+        if(isEmpty()) return "Cola vacía";
         int actual = inicio;
         String cola = "Cola: [";
         for(int i = 0 ; i < tamano ; i++){

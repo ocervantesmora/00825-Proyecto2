@@ -8,6 +8,7 @@ import AccesoADatos.*;
 import Entidades.*;
 import Utils.Utils;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -164,8 +165,8 @@ public class RegistrarArticulos extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         String validar = validarDatos();
+         int idDepartamentoSeleccionado = (int) modeloTabla.getValueAt(tblDepartamentos.getSelectedRow(), 0);
         if(Utils.isNullOrWhiteSpace(validar)){
-            int idDepartamentoSeleccionado = (int) modeloTabla.getValueAt(tblDepartamentos.getSelectedRow(), 0);
             Departamento departamentoSeleccionado = DepartamentoAD.consultarPorId(idDepartamentoSeleccionado);
             boolean guardadoCorrecto = departamentoSeleccionado.agregarArticulo(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
             if(!guardadoCorrecto){
@@ -174,6 +175,16 @@ public class RegistrarArticulos extends javax.swing.JFrame {
             else txtNombre.setText("");
         } else JOptionPane.showMessageDialog(this,validar);
         cargarDatosEnTabla();
+        
+        //Se vuelve a seleccionar el mismo departamento que estaba seleccionado
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            int idActual = (int) modeloTabla.getValueAt(i, 0);
+            if (idActual == idDepartamentoSeleccionado) {
+                tblDepartamentos.setRowSelectionInterval(i, i);
+                break;
+            }
+        }
+        txtNombre.requestFocusInWindow();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     public String validarDatos(){
@@ -194,6 +205,10 @@ public class RegistrarArticulos extends javax.swing.JFrame {
         };
         // Asigna el modelo recién creado a la tabla que va a mostar los datos
         tblDepartamentos.setModel(modeloTabla);
+        tblDepartamentos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblDepartamentos.getColumnModel().getColumn(0).setPreferredWidth(30); // Id
+        tblDepartamentos.getColumnModel().getColumn(1).setPreferredWidth(100); // Nombre
+        tblDepartamentos.getColumnModel().getColumn(2).setPreferredWidth(265); // Artículos
     }
     
     private void cargarDatosEnTabla(){

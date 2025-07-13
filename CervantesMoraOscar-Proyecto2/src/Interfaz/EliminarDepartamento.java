@@ -7,11 +7,16 @@ package Interfaz;
 import AccesoADatos.DepartamentoAD;
 import Entidades.Departamento;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author ocerv
+ * UNED II Cuatrimestre
+ * 00825 - Estructuras de datos
+ * Proyecto 2: Sistema de gestión de tienda por departamentos
+ * Estudiante: Oscar Eduardo Cervantes Mora
+ * Fecha: 2025-07-13
+ * @author ocervantesmora
  */
 public class EliminarDepartamento extends javax.swing.JFrame {
     
@@ -81,20 +86,20 @@ public class EliminarDepartamento extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(btnEliminarDepartamento)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(287, 287, 287)
                 .addComponent(btnVolver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(btnEliminarDepartamento)
+                        .addGap(0, 252, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +147,10 @@ public class EliminarDepartamento extends javax.swing.JFrame {
         };
         // Asigna el modelo recién creado a la tabla que va a mostar los datos
         tblDepartamentos.setModel(modeloTabla);
+        tblDepartamentos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblDepartamentos.getColumnModel().getColumn(0).setPreferredWidth(59); // Id
+        tblDepartamentos.getColumnModel().getColumn(1).setPreferredWidth(150); // Nombre
+        tblDepartamentos.getColumnModel().getColumn(2).setPreferredWidth(435); // Artículos
     }
     
     private void cargarDatosEnTabla(){

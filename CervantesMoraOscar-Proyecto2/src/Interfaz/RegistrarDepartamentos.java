@@ -8,6 +8,7 @@ import Utils.Utils;
 import Entidades.Departamento;
 import AccesoADatos.DepartamentoAD;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -104,21 +105,21 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(44, 44, 44)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(13, Short.MAX_VALUE))))
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel2)
+                        .addGap(44, 44, 44)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(53, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(161, 161, 161)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
                     .addComponent(btnRegistrar))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +185,10 @@ public class RegistrarDepartamentos extends javax.swing.JFrame {
         };
         // Asigna el modelo recién creado a la tabla que va a mostar los datos
         tblDepartamentos.setModel(modeloTabla);
+        tblDepartamentos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblDepartamentos.getColumnModel().getColumn(0).setPreferredWidth(30); // Id
+        tblDepartamentos.getColumnModel().getColumn(1).setPreferredWidth(100); // Nombre
+        tblDepartamentos.getColumnModel().getColumn(2).setPreferredWidth(250); // Artículos
     }
     
     private void cargarDatosEnTabla(){
